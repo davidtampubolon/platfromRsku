@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Rumah Sakit Jendral Komang</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="css/full-width-pics.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+        <a href="index.html"></a>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">Rumah Sakit Jendral Komang</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                                        <a class="nav-link dropdown-toggle" href="#" id="pasienDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Pasien
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="pasienDropdown">
+                                <a class="dropdown-item" href="formpendaftaran.html">Tambah pasien</a>
+                                <a class="dropdown-item" href="formcari.html">Cari pasien</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="formklinik.html" id="AddKlinik" role="button">
+                                Tambah klinik
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href= "login.html" id="AddLogin" role="button">
+                                Login
+                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="lokasi.html" id="AddLokasi" role="button">
+                                Lokasi
+                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="tambahDokter.html" id="AddTambahDokter" role="button">
+                                Tambah Dokter
+                                   </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="dokter.html" id="AddDaftarDoktrer" role="button">
+                                Daftar Dokter
+                            </a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="antrianDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Antrian
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="antianDropdown">
+                                <a class="dropdown-item" href="antrian.html">Tamba Antrian</a>
+                                <a class="dropdown-item" href="antrian.html">Daftar Antrian</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Header - set the background image for the header in the line below -->
+        <header class="py-5 bg-image-full" style="background-image: url('hospital.jpg');">
+            <img class="img-fluid d-block mx-auto" src="index.png" alt="">
+        </header>
+
+        <!-- Content section -->
+        <section class="py-5">
+            <div class="container">
+                <h1>Selamat Datang di Rumah Sakit Jendral Komang</h1>
+                <p>Di RS ini kami memiliki dokter dokter profesional degan lulusan terbaik dalam negri maupun luar negri kami memiliki 17dokter umum, 16dokter saraf, dan 5dokter spesialis</p>
+            </div>
+        </section>
+        <div class="container">
+            <h1>Tambah Klinik</h1>
+        </div>
+
+        <div class="container">
+            <form method="post" onsubmit="return make_json(this)">
+                <div class="form-group">
+                    <label>iD Klinik :</label>
+                    <input type="text" class="form-control" name="idKlinik" placeholder="Masukkan Id Klinik">
+                     <label>Nama Klinik :</label>
+                    <input type="text" class="form-control" name="NamaKlinik" placeholder="Masukkan Nama Klinik">
+                     <label>Spesialis:</label>
+                    <input type="text" class="form-control" name="Spesialis" placeholder="Masukkan Spesialis">
+                </div>
+                <button type="submit" class="btn btn-primary">Tamabah</button>
+
+               
+        </div>
+
+    
+    <pre id="output">
+                
+    </pre>
+
+<script>
+                       function make_json(form) {
+                                            var json = {
+                                                "idKlinik": form.idKlinik.value,
+                                                "nama": form.nama.value,
+                                                "spesialis": form.spesialis.value
+                                            };
+                                            var html = JSON.stringify(json, 0, 100);
+                                            var url = "http://202.94.83.190:8080/Service_rsku165314115/webresources/Klinik/addKlinik";
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.open("POST", url, false);
+                                            xhr.setRequestHeader("Content-type", "application/json");
+                                            xhr.send(html);
+                                            document.getElementById("output").innerHTML = this.responseText;
+                                            return false;
+                                        }
+    
+</script>
+<!-- Image Section - set the background image for the header in the line below -->
+<section class="py-5 bg-image-full" style="background-image: url('komang.jpg');">
+    <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+    <div style="height: 200px;"></div>
+</section>
+
+
+<!-- Content section -->
+<section class="py-5">
+    <div class="container">
+        <h1>Alamat : </h1>
+        <p class="lead">Jln.Sarinembah NO25A Pematang Siantar Sumatera Utara</p>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
