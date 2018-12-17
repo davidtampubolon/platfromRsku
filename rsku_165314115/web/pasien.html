@@ -30,7 +30,8 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
 
-                          <li class="nav-item dropdown">
+
+      <li class="nav-item dropdown">
                                        <a class="nav-link" href="index.html" id="AddKlinik" role="button">
                                 Beranda
                             </a>
@@ -75,6 +76,7 @@
                             <div class="dropdown-menu" aria-labelledby="antianDropdown">
                                 <a class="dropdown-item" href="tambahAntrian.html">Tamba Antrian</a>
                                 <a class="dropdown-item" href="antrian.html">Daftar Antrian</a>
+
                         </li>
                     </ul>
                 </div>
@@ -94,95 +96,78 @@
             </div>
         </section>
         <div class="container">
-            <h1>Tambah Antrian</h1>
+            <h1>Daftar pasien</h1>
+
         </div>
-
-        <br/>
-
-                <form  onsubmit="return make_json(this)" method="POST">
-                    <div class="form-group">
-                        <label>ID </label>
-                        <input type="text" class="form-control" name="id" placeholder="Masukan ID">        
-
-                        <div class="form-group"> 
-                            <label>tanggal</label>
-                            <input type="text" class="form-control" name="tanggal" placeholder="Masukan tanggal">
-                        </div>
-                        <div class="form-group"> 
-                            <label>noRm</label>
-                            <input type="text" class="form-control" name="noRm" placeholder="Masukan noRm">
-                        </div>
-                        <div class="form-group"> 
-                            <label>nama</label>
-                            <input type="text" class="form-control" name="nama" placeholder="Masukan nama">
-                        </div>
-                        <div class="form-group"> 
-                            <label>alamat</label>
-                            <input type="text" class="form-control" name="alamat" placeholder="Masukan alamat">
-                        </div>
-                        <div class="form-group"> 
-                            <label>namaKlinik</label>
-                            <input type="text" class="form-control" name="namaKlinik" placeholder="Masukan nama Klinik">
-                        </div>
-
-                        <center><button type="submit" class="btn btn-outline-primary">Simpan</button></center>
-                    </div>
-                </form>
-                <pre id="output">
-                </pre>
-
-                <script>
-                    function make_json(form) {
-                        var json = {
-                            "id": form.id.value,
-                            "tanggal": form.tanggal.value,
-                            "noRm": form.noRm.value,
-                            "nama": form.nama.value,
-                            "alamat": form.alamat.value,
-                            "namaKlinik": form.namaKlinik.value
-                        };
-
-                        var html = JSON.stringify(json, 0, 100);
-                        var url = "http://202.94.83.190:8080/Service_rsku165314115/webresources/Antrian/addAntrian";
-
-                        var xhr = new XMLHttpRequest();
-                        xhr.open("POST", url, false);
-                        xhr.setRequestHeader("Content-type", "application/json");
-                        xhr.send(html);
-                        document.getElementById("output").innerHTML = "Save Succesfull";
-                        return false;
+        <button type="button"  onclick="loadDoc()" class="btn btn-primary">Daftar Pasien</button>
 
 
+
+        <div id="id01"></div>
+
+
+        <script>
+
+            function loadDoc() {
+                var xmlhttp = new XMLHttpRequest();
+                var url = "http://202.94.83.190:8080/Service_rsku165314115/webresources/Pasien";
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        myFunction(this.responseText);
                     }
-                </script>
-                <!-- Image Section - set the background image for the header in the line below -->
-                <section class="py-5 bg-image-full" style="background-image: url('komang.jpg');">
-                    <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
-                    <div style="height: 200px;"></div>
-                </section>
+                }
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+                function myFunction(response) {
+                    var arr = JSON.parse(response);
+                    var i;
+                    var out = "<center><table align='center' style='width: 60%;' border='1'> <tr><td>NO Rekam Medis</td><td>Nama</td><td>Alamat</td><td>Tanggal Lahir</td><td>Jenis Kelamin</td></tr></center>";
+                    for (i = 0; i < arr.length; i++) {
+                        out += "<tr><td>" +
+                                arr[i].noRm +
+                                "</td><td>" +
+                                arr[i].nama +
+                                "</td><td>" +
+                                arr[i].alamat +
+                                "</td><td>" +
+                                arr[i].tanggalLahir +
+                                "</td><td>" +
+                                arr[i].kelamin;
+                    }
+                    out += "<center></table></center>";
+                    document.getElementById("id01").innerHTML = out;
+                }
+            }
+        </script>
+
+        <!-- Image Section - set the background image for the header in the line below -->
+        <section class="py-5 bg-image-full" style="background-image: url('komang.jpg');">
+            <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+            <div style="height: 200px;"></div>
+        </section>
 
 
-                <!-- Content section -->
-                <section class="py-5">
-                    <div class="container">
-                        <h1>Alamat : </h1>
-                        <p class="lead">Jln.Sarinembah NO25A Pematang Siantar Sumatera Utara</p>
+        <!-- Content section -->
+        <section class="py-5">
+            <div class="container">
+                <h1>Alamat : </h1>
+                <p class="lead">Jln.Sarinembah NO25A Pematang Siantar Sumatera Utara</p>
 
-                    </div>
-                </section>
+            </div>
+        </section>
 
-                <!-- Footer -->
-                <footer class="py-5 bg-dark">
-                    <div class="container">
-                        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-                    </div>
-                    <!-- /.container -->
-                </footer>
+        <!-- Footer -->
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+            </div>
+            <!-- /.container -->
+        </footer>
 
-                <!-- Bootstrap core JavaScript -->
-                <script src="vendor/jquery/jquery.min.js"></script>
-                <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    </body>
 
-
-                </html>
+</html>

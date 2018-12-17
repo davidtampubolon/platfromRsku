@@ -30,27 +30,8 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html" id="AddKlinik" role="button">
-                                Beranda
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="index.html" id="AddKlinik" role="button">
-                                Beranda
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="pasienDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Pasien
-                            </a>
-
-                            <div class="dropdown-menu" aria-labelledby="pasienDropdown">
-                                <a class="dropdown-item" href="formpendaftaran.html">Tambah pasien</a>
-                                <a class="dropdown-item" href="formcari.html">Cari pasien</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                                         <a class="nav-link" href="index.html" id="AddKlinik" role="button">
+                     <li class="nav-item dropdown">
+                                       <a class="nav-link" href="index.html" id="AddKlinik" role="button">
                                 Beranda
                             </a>
                         </li>
@@ -62,12 +43,12 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="pasienDropdown">
-                                <a class="dropdown-item" href="formpendaftaran.html">Tambah pasien</a>
-                                <a class="dropdown-item" href="formcari.html">Cari pasien</a>
+                                <a class="dropdown-item" href="tambahPasien.html">Tambah pasien</a>
+                                <a class="dropdown-item" href="pasien.html">Cari pasien</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="formklinik.html" id="AddKlinik" role="button">
+                            <a class="nav-link" href="tambahKlinik.html" id="AddKlinik" role="button">
                                 Tambah klinik
                             </a>
                         </li>
@@ -92,7 +73,7 @@
                                 Antrian
                             </a>
                             <div class="dropdown-menu" aria-labelledby="antianDropdown">
-                                <a class="dropdown-item" href="antrian.html">Tamba Antrian</a>
+                                <a class="dropdown-item" href="tambahAntrian.html">Tamba Antrian</a>
                                 <a class="dropdown-item" href="antrian.html">Daftar Antrian</a>
                         </li>
                     </ul>
@@ -118,58 +99,66 @@
         <div class="container">
             <form method="post" onsubmit="return make_json(this)">
 
-                <div class="form-group row">
-                    <label for="nama" class="col-md-4 col-form-label text-md-right">Nama Pasien</label>
-                    <div class="col-md-6">
-                        <input type="text" id="nama" class="form-control" name="nama">
+     
+
+                <br/>
+
+                <form  onsubmit="return make_json(this)" method="POST">
+                    <div class="form-group">
+                        <label>No Rekam Medis</label>
+                        <input type="text" class="form-control" name="noRm" placeholder="Masukan nomer rekam medis">        
+
+                        <div class="form-group"> 
+                            <label>Nama</label>
+                            <input type="text" class="form-control" name="nama" placeholder="Masukan nama pasien">
+                        </div>
+                        <div class="form-group"> 
+                            <label>Alamat</label>
+                            <input type="text" class="form-control" name="alamat" placeholder="Masukan alamat">
+                        </div>
+                        <div class="form-group"> 
+                            <label>NIK</label>
+                            <input type="text" class="form-control" name="nik" placeholder="Masukan NIK">
+                        </div>
+                        <div class="form-group"> 
+                            <label>Tanggal Lahir</label>
+                            <input type="text" class="form-control" name="tanggalLahir" placeholder="Masukan Tahun/Tgl/bulan">
+                        </div>
+                        <div class="form-group"> 
+                            <label>Kelamin</label>
+                            <input type="text" class="form-control" name="kelamin" placeholder="Masukan Jenis Kelamain">
+                        </div>
+
+                        <center><button type="submit" class="btn btn-outline-primary">Simpan</button></center>
                     </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="alamat" class="col-md-4 col-form-label text-md-right">Alamat</label>
-                    <div class="col-md-6">
-                        <input type="text" id="alamat" class="form-control" name="alamat">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="tanggalLahir" class="col-md-4 col-form-label text-md-right">Tanggal Lahir</label>
-                    <div class="col-md-6">
-                        <input type="date" id="tanggalLahir" class="form-control" name="tanggalLahir">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="kelamin" class="col-md-4 col-form-label text-md-right">Jenis Kelamin</label>
-                    <select class="col-md-6" id="kelamin">
-                        <option></option>
-                        <option label="Laki - laki">Laki - Laki</option>
-                        <option label="Perempuan">Perempuan</option>
-
-                    </select>
-
-                    <button type="submit" class="btn btn-primary">
-                        Tambah Pasien
-                    </button>
+                </form>
+                <pre id="output">
+                </pre>
                 </div>
                 <script>
-                    function make_json(form) {
+                  function make_json(form) {
                         var json = {
-                            "nik": form.nik.value,
+                            "noRm": form.noRm.value,
                             "nama": form.nama.value,
                             "alamat": form.alamat.value,
+                            "nik": form.nik.value,
                             "tanggalLahir": form.tanggalLahir.value,
                             "kelamin": form.kelamin.value
                         };
+
                         var html = JSON.stringify(json, 0, 100);
-                        var Url = "http://202.94.83.190:8080/Service_rsku165314079/webresources/Pasien/addPasien";
+                        var url = "http://202.94.83.190:8080/Service_rsku165314115/webresources/Pasien/addPasien";
+
                         var xhr = new XMLHttpRequest();
-                        xhr.open('POST', Url, false);
+                        xhr.open("POST", url, false);
                         xhr.setRequestHeader("Content-type", "application/json");
                         xhr.send(html);
-                        document.getElementById("output").innerHTML = this.responseText;
+                        document.getElementById("output").innerHTML = "Save Succesfull";
                         return false;
+
+
                     }
+                </script>
 
 
                 </script>

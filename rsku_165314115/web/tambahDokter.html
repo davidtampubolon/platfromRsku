@@ -29,42 +29,25 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html" id="AddKlinik" role="button">
-                                Beranda
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
+                         <li class="nav-item dropdown">
                                        <a class="nav-link" href="index.html" id="AddKlinik" role="button">
                                 Beranda
                             </a>
                         </li>
-                                   <a class="nav-link" href="index.html" id="AddKlinik" role="button">
-                                Beranda
-                            </a>
-                        </li>
+
+
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="pasienDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               <a class="nav-link dropdown-toggle" href="#" id="pasienDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Pasien
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="pasienDropdown">
-                                <a class="dropdown-item" href="formpendaftaran.html">Tambah pasien</a>
-                                <a class="dropdown-item" href="formcari.html">Cari pasien</a>
+                                <a class="dropdown-item" href="tambahPasien.html">Tambah pasien</a>
+                                <a class="dropdown-item" href="pasien.html">Cari pasien</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                                  <a class="nav-link dropdown-toggle" href="#" id="pasienDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Pasien
-                            </a>
-
-                            <div class="dropdown-menu" aria-labelledby="pasienDropdown">
-                                <a class="dropdown-item" href="formpendaftaran.html">Tambah pasien</a>
-                                <a class="dropdown-item" href="formcari.html">Cari pasien</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="formklinik.html" id="AddKlinik" role="button">
+                            <a class="nav-link" href="tambahKlinik.html" id="AddKlinik" role="button">
                                 Tambah klinik
                             </a>
                         </li>
@@ -89,7 +72,7 @@
                                 Antrian
                             </a>
                             <div class="dropdown-menu" aria-labelledby="antianDropdown">
-                                <a class="dropdown-item" href="antrian.html">Tamba Antrian</a>
+                                <a class="dropdown-item" href="tambahAntrian.html">Tamba Antrian</a>
                                 <a class="dropdown-item" href="antrian.html">Daftar Antrian</a>
 
                         </li>
@@ -114,39 +97,44 @@
             <h1>Tambah Dokter</h1>
         </div>
 
-        <div class="container">
-            <form method="post" onsubmit="return make_json(this)">
-                <div class="form-group">
-                    <label>Nama Dokter :</label>
-                    <input type="text" class="form-control" name="NamaDokter" placeholder="Masukkan Nama Dokter">
-                    <label>Spesialis :</label>
-                    <input type="text" class="form-control" name="Spesialis" placeholder="Masukkan Spesialis">
-                </div>
-                <button type="submit" class="btn btn-primary">Tambah Dokter</button>
-        </div>
+          <br/>
+
+                <form  onsubmit="return make_json(this)" method="POST">
+                    <div class="form-group"> 
+                        <label>nama</label>
+                        <input type="text" class="form-control" name="nama" placeholder="Masukan nama">
+                    </div>
+                    <div class="form-group"> 
+                        <label>spesialis</label>
+                        <input type="text" class="form-control" name="spesialis" placeholder="Masukan spesialis">
+                    </div>
+
+                    <center><button type="submit" class="btn btn-outline-primary">Simpan</button></center>
+        
+            </form>
+            <pre id="output">
+            </pre>
+
+            <script>
+                function make_json(form) {
+                    var json = {
+                        "nama": form.nama.value,
+                        "spesialis": form.spesialis.value
+                    };
+
+                    var html = JSON.stringify(json, 0, 100);
+                    var url = "http://202.94.83.190:8080/Service_rsku165314115/webresources/Dokter/addDokter";
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", url, false);
+                    xhr.setRequestHeader("Content-type", "application/json");
+                    xhr.send(html);
+                    document.getElementById("output").innerHTML = "Save Succesfull";
+                    return false;
 
 
-        <pre id="output">
-                
-        </pre>
-
-        <script>
-            function make_json(form) {
-                var json = {
-                    "nama": form.nama.value,
-                    "spesialis": form.spesialis.value
-                };
-                var html = JSON.stringify(json, 0, 100);
-                var url = "http://202.94.83.190:8080/Service_rsku165314079/webresources/Dokter/addDokter";
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", url, false);
-                xhr.setRequestHeader("Content-type", "application/json");
-                xhr.send(html);
-                document.getElementById("output").innerHTML = this.responseText;
-                return false;
-            }
-
-        </script>
+                }
+            </script>
         <!-- Image Section - set the background image for the header in the line below -->
         <section class="py-5 bg-image-full" style="background-image: url('komang.jpg');">
             <!-- Put anything you want here! There is just a spacer below for demo purposes! -->

@@ -29,15 +29,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html" id="AddKlinik" role="button">
-                                Beranda
-                            </a>
-                        </li>
+                       
+                        
 
-
-                        <li class="nav-item dropdown">
-                          <a class="nav-link" href="index.html" id="AddKlinik" role="button">
+      <li class="nav-item dropdown">
+                                       <a class="nav-link" href="index.html" id="AddKlinik" role="button">
                                 Beranda
                             </a>
                         </li>
@@ -49,12 +45,12 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="pasienDropdown">
-                                <a class="dropdown-item" href="formpendaftaran.html">Tambah pasien</a>
-                                <a class="dropdown-item" href="formcari.html">Cari pasien</a>
+                                <a class="dropdown-item" href="tambahPasien.html">Tambah pasien</a>
+                                <a class="dropdown-item" href="pasien.html">Cari pasien</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="formklinik.html" id="AddKlinik" role="button">
+                            <a class="nav-link" href="tambahKlinik.html" id="AddKlinik" role="button">
                                 Tambah klinik
                             </a>
                         </li>
@@ -79,8 +75,8 @@
                                 Antrian
                             </a>
                             <div class="dropdown-menu" aria-labelledby="antianDropdown">
-                                <a class="dropdown-item" href="formpendaftaran.html">Tamba Antrian</a>
-                                <a class="dropdown-item" href="formcari.html">Daftar Antrian</a>
+                                <a class="dropdown-item" href="tambahAntrian.html">Tamba Antrian</a>
+                                <a class="dropdown-item" href="antrian.html">Daftar Antrian</a>
 
                         </li>
                     </ul>
@@ -112,36 +108,38 @@
 
 
         <script>
-            function loadDoc() {
-                var xmlhttp = new XMLHttpRequest();
 
-                var url = "http://202.94.83.190:8080/Service_rsku165314115/webresources/Dokter";
+                function loadDoc() {
+                    var xmlhttp = new XMLHttpRequest();
 
-                xmlhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        myFunction(this.responseText);
+                    var url = "http://202.94.83.190:8080/Service_rsku165314115/webresources/Dokter";
+
+                    xmlhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            myFunction(this.responseText);
+                        }
+                    }
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+                    function myFunction(response) {
+                        var arr = JSON.parse(response);
+                        var i;
+                        var out = "<table>";
+
+                        for (i = 0; i < arr.length; i++) {
+                            out += "<tr><td>" +
+                                    arr[i].id +
+                                    "</td><td>" +
+                                    arr[i].nama +
+                                    "</td><td>" +
+                                    arr[i].spesialis;
+                        }
+                        out += "</table>";
+                        document.getElementById("id01").innerHTML = out;
                     }
                 }
-                xmlhttp.open("GET", url, true);
-                xmlhttp.send();
-                function myFunction(response) {
-                    var arr = JSON.parse(response);
-                    var i;
-                    var out = "<table>";
-
-                    for (i = 0; i < arr.length; i++) {
-                        out += "<tr><td>" +
-                                arr[i].id +
-                                "</td><td>" +
-                                arr[i].nama +
-                                "</td><td>" +
-                                arr[i].spesialis;
-                    }
-                    out += "</table>";
-                    document.getElementById("id01").innerHTML = out;
-                }
-            }
         </script>
+
         <!-- Image Section - set the background image for the header in the line below -->
         <section class="py-5 bg-image-full" style="background-image: url('komang.jpg');">
             <!-- Put anything you want here! There is just a spacer below for demo purposes! -->

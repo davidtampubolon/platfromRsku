@@ -1,109 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<html>
     <head>
-
+        <title>Lokasi</title>
+        <meta name="viewport" content="initial-scale=1.0">
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-
-        <title>Rumah Sakit Jendral Komang</title>
-
-        <!-- Bootstrap core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom styles for this template -->
-        <link href="css/full-width-pics.css" rel="stylesheet">
-
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+            #map {
+                height:200%;
+               }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
     </head>
-
     <body>
-        <a href="index.html"></a>
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="#">Rumah Sakit Jendral Komang</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-            <a class="nav-link dropdown-toggle" href="#" id="pasienDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Pasien
-                            </a>
+        <h2><b>Lokasi Rumah Sakit Jendral Komang</b></h2>
 
-                            <div class="dropdown-menu" aria-labelledby="pasienDropdown">
-                                <a class="dropdown-item" href="formpendaftaran.html">Tambah pasien</a>
-                                <a class="dropdown-item" href="formcari.html">Cari pasien</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="formklinik.html" id="AddKlinik" role="button">
-                                Tambah klinik
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href= "login.html" id="AddLogin" role="button">
-                                Login
-                            </a>
-                        <li class="nav-item">
-                            <a class="nav-link" href="lokasi.html" id="AddLokasi" role="button">
-                                Lokasi
-                            </a>
-                        <li class="nav-item">
-                            <a class="nav-link" href="tambahDokter.html" id="AddTambahDokter" role="button">
-                                Tambah Dokter
-                                   </a>
-                        <li class="nav-item">
-                            <a class="nav-link" href="dokter.html" id="AddDaftarDoktrer" role="button">
-                                Daftar Dokter
-                            </a>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="antrianDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Antrian
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="antianDropdown">
-                                <a class="dropdown-item" href="antrian.html">Tamba Antrian</a>
-                                <a class="dropdown-item" href="antrian.html">Daftar Antrian</a>
+        <button type="button" onclick="loadDoc()">Click Here</button>
 
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <p id="demo"></p>
+        <div id="map"></div>
 
-        <!-- Header - set the background image for the header in the line below -->
-        <header class="py-5 bg-image-full" style="background-image: url('hospital.jpg');">
-            <img class="img-fluid d-block mx-auto" src="index.png" alt="">
-        </header>
-
-        <!-- Content section -->
-        <section class="py-5">
-            <div class="container">
-                <h1>Selamat Datang di Rumah Sakit Jendral Komang</h1>
-                <p>Di RS ini kami memiliki dokter dokter profesional degan lulusan terbaik dalam negri maupun luar negri kami memiliki 17dokter umum, 16dokter saraf, dan 5dokter spesialis</p>
-            </div>
-        </section>
-        <div class="container">
-            <h1>Tampilkan Lokasi</h1>
-
-       <center><button type="button" onclick="loadDoc()" id="btn">Lokasi Rumah Sakit</button><br><br></center>
-                                            <p id="demo"></p>
-                                            <div id="map"></div>
 
         <script>
-
+            var map;
             function loadDoc() {
-                var map;
-                //var url = "http://202.94.83.190:8080/Service_rsku165314079/webresources/Lokasi/getLocation";
-                var url = "http://202.94.83.190:8080/Service_rsku165314079/webresources/Lokasi";
 
+                var url = "http://202.94.83.190:8080/Service_rsku165314115/webresources/Lokasi";
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
                         document.getElementById("demo").innerHTML = this.responseText;
+
                         var obj = JSON.parse(this.responseText);
                         map = new google.maps.Map(document.getElementById('map'), {
                             center: {lat: obj[0].lat, lng: obj[0].lng},
@@ -114,39 +46,12 @@
                             marker[i] = new google.maps.Marker({position: {lat: obj[i].lat, lng: obj[i].lng}, map: map});
                         }
                     }
-                }
-                ;
+                };
                 xhttp.open("GET", url, true);
                 xhttp.send();
+            }
         </script>
-        <!-- Image Section - set the background image for the header in the line below -->
-        <section class="py-5 bg-image-full" style="background-image: url('komang.jpg');">
-            <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
-            <div style="height: 200px;"></div>
-        </section>
-
-
-        <!-- Content section -->
-        <section class="py-5">
-            <div class="container">
-                <h1>Alamat : </h1>
-                <p class="lead">Jln.Sarinembah NO25A Pematang Siantar Sumatera Utara</p>
-
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="py-5 bg-dark">
-            <div class="container">
-                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-            </div>
-            <!-- /.container -->
-        </footer>
-
-        <!-- Bootstrap core JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnD2l64I6G6fUkPpc3D79Jcau30v8xEKE&callback=initMap"
+        async defer></script>
     </body>
 </html>
-
